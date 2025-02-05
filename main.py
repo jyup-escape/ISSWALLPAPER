@@ -5,6 +5,12 @@ import tempfile
 import shutil
 from PIL import Image
 
+try:
+    import imageio_ffmpeg
+    ffmpeg_via_pip = True
+except ImportError:
+    ffmpeg_via_pip = False
+
 youtube_live_url = "https://www.youtube.com/watch?v=0FBiyFpV__g"
 
 yt_dlp_cmd = None
@@ -35,6 +41,8 @@ if shutil.which("ffmpeg"):
     ffmpeg_cmd = ["ffmpeg"]
 elif shutil.which("ffmpeg.exe"):
     ffmpeg_cmd = [shutil.which("ffmpeg.exe")]
+elif ffmpeg_via_pip:
+    ffmpeg_cmd = [imageio_ffmpeg.get_ffmpeg_exe()]
 else:
     print("ffmpeg が見つかりませんでした。インストールしてください。")
     exit(1)
