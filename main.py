@@ -6,7 +6,7 @@ import shutil
 from PIL import Image
 
 try:
-    import imageio_ffmpeg
+    import ffmpeg
     ffmpeg_via_pip = True
 except ImportError:
     ffmpeg_via_pip = False
@@ -42,7 +42,7 @@ if shutil.which("ffmpeg"):
 elif shutil.which("ffmpeg.exe"):
     ffmpeg_cmd = [shutil.which("ffmpeg.exe")]
 elif ffmpeg_via_pip:
-    ffmpeg_cmd = [imageio_ffmpeg.get_ffmpeg_exe()]
+    ffmpeg_cmd = [ffmpeg.path.FFMPEG_BINARY]
 else:
     print("ffmpeg が見つかりませんでした。インストールしてください。")
     exit(1)
